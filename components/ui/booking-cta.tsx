@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
 
+
 export default function BookingCTA() {
   return (
     <div className="bg-[#fff9f0] py-16">

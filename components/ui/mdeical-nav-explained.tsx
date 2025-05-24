@@ -1,28 +1,32 @@
-"use client"
-
-import { useState } from "react"
-import Link from "next/link"
-import { usePathname } from "next/navigation"
-import { Phone, Clock, Menu } from "lucide-react"
-import { Button } from "@/components/ui/button"
-import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
-import { NavigationMenu, NavigationMenuItem, NavigationMenuList } from "@/components/ui/navigation-menu"
-import { cn } from "@/lib/utils"
-import Image from "next/image"
+"use client";
+import { useRouter } from "next/navigation";
+import { useState } from "react";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { Phone, Clock, Menu } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
+import {
+  NavigationMenu,
+  NavigationMenuItem,
+  NavigationMenuList,
+} from "@/components/ui/navigation-menu";
+import { cn } from "@/lib/utils";
+import Image from "next/image";
 
 export default function MedicalNavExplained() {
-  const [isOpen, setIsOpen] = useState(false)
-  const pathname = usePathname()
+  const [isOpen, setIsOpen] = useState(false);
+  const pathname = usePathname();
+  const router = useRouter();
 
   const navItems = [
     { name: "Home", path: "/" },
     { name: "About", path: "/about" },
     { name: "Services", path: "/services" },
-    { name: "Our Team", path: "/team" },
     { name: "Blog", path: "/blog" },
     { name: "Gallery", path: "/gallery" },
     { name: "Contact", path: "/contact" },
-  ]
+  ];
 
   return (
     <div className="flex flex-col w-full fixed top-0 left-0 right-0 z-50">
@@ -54,7 +58,7 @@ export default function MedicalNavExplained() {
             </div>
           </Link>
 
-          {/* MOBILE NAVIGATION - Only visible on small screens */}
+          {/* Mobile Navigation */}
           <Sheet open={isOpen} onOpenChange={setIsOpen}>
             <SheetTrigger asChild className="md:hidden">
               <Button variant="outline" size="sm" className="px-2">
@@ -70,7 +74,7 @@ export default function MedicalNavExplained() {
                     href={item.path}
                     className={cn(
                       "block px-2 py-1 text-lg font-medium",
-                      pathname === item.path && "text-blue-800 font-semibold",
+                      pathname === item.path && "text-blue-800 font-semibold"
                     )}
                     onClick={() => setIsOpen(false)}
                   >
@@ -78,25 +82,32 @@ export default function MedicalNavExplained() {
                   </Link>
                 ))}
                 <div className="flex flex-col gap-2 mt-4">
-                  <Button className="w-full bg-teal-600 hover:bg-teal-700">BOOK NOW</Button>
-                  <Button className="w-full bg-blue-800 hover:bg-blue-900">LOG IN</Button>
+                  <Button
+                    className="w-full bg-teal-600 hover:bg-teal-700"
+                    onClick={() => router.push("/bookings?service=immigration-medical&name=Immigration%20Medical%20Examinations")}
+                  >
+                    BOOK NOW
+                  </Button>
+                  <Button className="w-full bg-blue-800 hover:bg-blue-900">
+                    LOG IN
+                  </Button>
                 </div>
               </div>
             </SheetContent>
           </Sheet>
 
-          {/* DESKTOP NAVIGATION - This is your main navigation section */}
-          {/* It's hidden on mobile (hidden) and visible on medium screens and up (md:flex) */}
-          <div className="hidden md:flex items-center justify-between flex-1 ml-10 border-2 border-red-500">
+          {/* Desktop Navigation */}
+          <div className="hidden md:flex items-center justify-between flex-1 ml-10">
             <NavigationMenu className="mx-auto">
-              <NavigationMenuList className="flex space-x-2 border-2 border-blue-500">
+              <NavigationMenuList className="flex space-x-2">
                 {navItems.map((item) => (
                   <NavigationMenuItem key={item.path}>
                     <Link
                       href={item.path}
                       className={cn(
                         "group inline-flex h-9 w-max items-center justify-center rounded-md px-4 py-2 text-sm font-medium transition-colors hover:bg-blue-50 hover:text-blue-800 focus:bg-blue-50 focus:text-blue-800 focus:outline-none border border-gray-200",
-                        pathname === item.path && "bg-blue-50 text-blue-800 font-semibold",
+                        pathname === item.path &&
+                          "bg-blue-50 text-blue-800 font-semibold"
                       )}
                     >
                       {item.name}
@@ -107,12 +118,16 @@ export default function MedicalNavExplained() {
             </NavigationMenu>
 
             <div className="flex items-center gap-2">
-              <Button className="bg-teal-600 hover:bg-teal-700 text-white">BOOK NOW</Button>
-              <Button className="bg-blue-800 hover:bg-blue-900 text-white">LOG IN</Button>
+              <Button
+                className="w-full bg-teal-600 hover:bg-teal-700"
+                onClick={() => router.push("/bookings?service=immigration-medical&name=Immigration%20Medical%20Examinations")}
+              >
+                BOOK NOW
+              </Button>
             </div>
           </div>
         </div>
       </div>
     </div>
-  )
+  );
 }

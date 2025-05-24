@@ -18,7 +18,6 @@ export default function MedicalNav() {
     { name: "Home", path: "/" },
     { name: "About", path: "/about" },
     { name: "Services", path: "/services" },
-    { name: "Our Team", path: "/team" },
     { name: "Blog", path: "/blog" },
     { name: "Gallery", path: "/gallery" },
     { name: "Contact", path: "/contact" },

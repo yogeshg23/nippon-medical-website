@@ -1,5 +1,6 @@
 import Image from "next/image"
 import { Button } from "@/components/ui/button"
+import Link from 'next/link';
 
 export default function AboutUs() {
   return (
@@ -16,7 +17,11 @@ export default function AboutUs() {
               take our service which comes up to 1500+. The website will provide you assistance with the name and
               address of the medical centre that will conduct your medical check up.
             </p>
-            <Button className="bg-[#00857c] hover:bg-[#006e66] text-white text-xs h-8 rounded">LEARN MORE</Button>
+            <Link href="/about" passHref>
+  <Button className="bg-[#00857c] hover:bg-[#006e66] text-white text-xs h-8 rounded">
+    LEARN MORE
+  </Button>
+</Link>
           </div>
           <div className="relative">
             <div className="relative z-10">
